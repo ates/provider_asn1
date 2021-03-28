@@ -50,7 +50,7 @@ resolve_args(State, Defaults) ->
     {PArgs, _} = rebar_state:command_parsed_args(State),
     Config = rebar_state:get(State, asn1_args, []),
 
-    PArgsMap = maps:from_list(PArgs),
+    PArgsMap = maps:from_list([A || A <- PArgs, not is_atom(A)]),
     ConfigMap = maps:from_list(Config),
     DefaultsMap = maps:from_list(Defaults),
 
